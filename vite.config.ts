@@ -16,6 +16,7 @@ export default defineConfig({
     vueDevTools(),
     UnoCSS(),
     AutoImport({
+      dts: true,
       imports: [
         'vue',
         'vue-router',
