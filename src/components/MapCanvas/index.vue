@@ -1,16 +1,24 @@
 <script setup lang="ts">
-import * as d3 from 'd3'
-import { rendererMap } from './renderer'
-const refContainer = ref<HTMLElement>()
+import { MapController } from '@/core'
+const refWrap = ref<HTMLElement>()
 
 onMounted(() => {
-  const svg = d3.select(refContainer.value!).append('svg').attr('width', '100%').attr('height', '100%')
-  rendererMap(svg)
+  nextTick(() => {
+    const controller = new MapController(refWrap.value!)
+    //@ts-ignore
+    window.controller = controller
+  })
 })
 </script>
 
 <template>
-  <div class="map-container" ref="refContainer"></div>
+  <div class="map-container h-screen w-screen all-center">
+    <div
+      class="map-wrap rounded shadow-xl overflow-hidden"
+      :style="{ width: '700px', height: '500px' }"
+      ref="refWrap"
+    ></div>
+  </div>
 </template>
 
 <style lang="scss"></style>
