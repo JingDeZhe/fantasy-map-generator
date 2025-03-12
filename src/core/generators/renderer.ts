@@ -2,6 +2,8 @@ import * as PIXI from 'pixi.js'
 import type { MapState, MapConfig, RiverPath, City } from './types'
 import { getTerrainColor } from './terrains'
 
+import citySvgIcon from '@/assets/imgs/city-gate-svgrepo-com.svg?raw'
+
 export class MapRenderer {
   private app: PIXI.Application
   private terrainSprite: PIXI.Sprite
@@ -55,7 +57,10 @@ export class MapRenderer {
   public updateCities(cities: City[], config: MapConfig) {
     this.citiesContainer.removeChildren()
     cities.forEach(({ x, y }) => {
-      const t = new PIXI.Graphics().circle(x * config.CELL_SIZE, y * config.CELL_SIZE, 4).fill(0xe06c66)
+      const svgContext = new PIXI.GraphicsContext().svg(citySvgIcon)
+      const t = new PIXI.Graphics(svgContext)
+      t.setSize(config.CELL_SIZE * 2)
+      t.position.set(x * config.CELL_SIZE, y * config.CELL_SIZE)
       this.citiesContainer.addChild(t)
     })
   }
