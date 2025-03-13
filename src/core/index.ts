@@ -39,7 +39,7 @@ export class MapController {
     this.generateNewMap()
   }
 
-  private generateNewMap() {
+  private async generateNewMap() {
     this.state = {
       heightMap: generateHeightMap(config),
       rivers: [],

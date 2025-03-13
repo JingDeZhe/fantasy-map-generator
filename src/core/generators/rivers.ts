@@ -28,6 +28,5 @@ export function generateRivers(state: MapState, config: MapConfig): RiverPath[] 
 
     path.length > 0 && rivers.push(path)
   }
-  console.log(rivers)
   return rivers
 }
